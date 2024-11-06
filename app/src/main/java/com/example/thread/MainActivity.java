@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 ProgressBar barra;
 Button boton_sin_hilos;
+Button boton_con_hilos;
 
 
     @Override
@@ -25,6 +26,7 @@ Button boton_sin_hilos;
 
         barra = findViewById(R.id.progressBar);
         boton_sin_hilos= findViewById(R.id.btn_sin_hilos);
+        boton_con_hilos=findViewById(R.id.btn_con_hilos);
 
         boton_sin_hilos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,41 @@ Button boton_sin_hilos;
                 }
                 Toast.makeText(getApplicationContext(),"Tarea finalizada", Toast.LENGTH_SHORT).show();
 
+            }
+        }); // click del otro boton sin hilos
+        boton_con_hilos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        barra.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                barra.setMax(100);
+                                barra.setProgress(0);
+                            }
+                        });
+
+                        for (int i = 0; i < 10; i++) {
+                            ejecutarTareaLaraga();
+
+                            barra.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    barra.incrementProgressBy(10);
+                                }
+                            });
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "Tarea terminada", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).start();
             }
         });
 
