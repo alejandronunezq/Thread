@@ -20,7 +20,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_marginHorizontal="20dp"/>
 
     <Button
         android:id="@+id/btn_sin_hilos"
@@ -33,6 +33,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tarea con hilos" />
+
+    <Button
+        android:id="@+id/btn_con_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tarea con Asyncast" />
+
+    <Button
+        android:id="@+id/btn_Dialogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AsyncTask con dialogo" />
+
 
 
 </LinearLayout>
